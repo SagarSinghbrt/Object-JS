@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<input id="task" /> <button id="add">Add</button>
+		<ul id="tasks"></ul>
+		<script>
+			const ul = document.getElementById("tasks");
+			add.addEventListener("click", () => {
+				let value = task.value.trim();
+				task.value = "";
+				if (!value) return;
+				ul.insertAdjacentHTML(
+					"beforeend",
+					`
+				<li>${value} <button class="del">X</button></li>
+				`
+				);
+			});
+
+			ul.addEventListener("click", (e) => {
+				if (e.target.matches(".del")) e.target.parentElement.remove();
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<input id="styled" placeholder="Focus me" />
+		<script>
+			const i = document.getElementById("styled");
+			["focus", "blur"].forEach((ev) =>
+				i.addEventListener(ev, () => {
+					i.style.color = ev === "focus" ? "black" : "#fff";
+				})
+			);
+		</script>
+	</body>
+</html>

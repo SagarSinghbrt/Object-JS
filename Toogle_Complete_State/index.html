@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Toggle</title>
+		<style>
+			.done {
+				text-decoration: line-through;
+				opacity: 0.6;
+				user-select: none;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="todo">
+			<li>Sample Task</li>
+			<li>Also Sample Task</li>
+			<li>This is Sample Task</li>
+		</ul>
+		<script>
+			document.getElementById("todo").addEventListener("click", (e) => {
+				if (e.target.tagName === "LI")
+					e.target.classList.toggle("done");
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Restore from localStorage</title>
+	</head>
+	<body>
+		<input type="text" id="text" />
+		<ul id="todos"></ul>
+		<script>
+			const lists = document.getElementById("todos");
+			const listData = JSON.parse(localStorage.getItem("lists")) || [];
+			const input = document.getElementById("text");
+
+			input.addEventListener("keydown", (e) => {
+				if (!input.value || !input.value.trim()) return;
+				if (e.key === "Enter") {
+					let value = input.value.trim();
+					input.value = "";
+					listData.push(value);
+					saveLC();
+					display();
+				}
+			});
+
+			function display() {
+				lists.innerHTML = "";
+				listData.forEach((data) => {
+					lists.insertAdjacentHTML(
+						"beforeend",
+						`
+				<li> ${data} <button class="remove">X</button></li>
+				`
+					);
+				});
+			}
+
+			lists.addEventListener("click", (e) => {
+				if (e.target.classList.contains("remove")) {
+					let index = Array.from(lists.children).indexOf(
+						e.target.parentElement
+					);
+					listData.splice(index, 1);
+					saveLC();
+					e.target.parentElement.remove();
+				} else if (e.target.tagName === "LI") {
+					let litxt = e.target.firstChild.textContent;
+					let newValue = prompt("Edit List:", litxt);
+					if (!newValue || !newValue.trim()) return;
+					let index = Array.from(lists.children).indexOf(e.target);
+					listData[index] = newValue.trim();
+					saveLC();
+					e.target.innerHTML = `${newValue} <button class="remove">X</button>`;
+				}
+			});
+
+			function saveLC() {
+				localStorage.setItem("lists", JSON.stringify(listData));
+			}
+
+			display();
+		</script>
+	</body>
+</html>

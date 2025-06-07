@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Form Validation</title>
+	</head>
+	<body>
+		<form id="f">
+			<input id="val" required minlength="3" />
+			<button type="submit">Save</button>
+		</form>
+		<script>
+			document.getElementById("f").addEventListener("submit", (e) => {
+				const input = document.getElementById("val"); // Get input field
+
+				if (!input.checkValidity()) {
+					// Check input, not form
+					alert("At least 3 characters!");
+					e.preventDefault(); // Stop form submission
+				}
+			});
+		</script>
+	</body>
+</html>

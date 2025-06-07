@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Event Driven</title>
+	</head>
+	<body>
+		<input id="itemInput" placeholder="New Item" />
+		<button id="addBtn">Add</button>
+		<ul id="list"></ul>
+		<script>
+			const list = document.getElementById("list");
+			const btn = document.getElementById("addBtn");
+
+			// button that add the list(li)
+			btn.addEventListener("click", () => {
+				let userInput = document
+					.getElementById("itemInput")
+					.value.trim();
+				if (userInput) {
+					addList(userInput);
+					document.getElementById("itemInput").value = "";
+				}
+			});
+
+			// Display the list(li)
+			const addList = (Inputvalue) => {
+				const li = document.createElement("li");
+				li.innerHTML = `${Inputvalue} <span class="remove">×</span>
+				`;
+				list.appendChild(li);
+			};
+			// Event Delegation for remove the list(li)
+			list.addEventListener("click", (e) => {
+				if (e.target.classList.contains("remove")) {
+					const li = e.target.parentElement;
+					list.removeChild(li);
+				}
+			});
+		</script>
+	</body>
+</html>

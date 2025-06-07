@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Live Search</title>
+	</head>
+	<body>
+		<input id="search" placeholder="Search…" />
+		<ul id="data">
+			<li>Apple</li>
+			<li>Banana</li>
+			<li>Orange</li>
+		</ul>
+		<script>
+			const inputField = document.getElementById("search");
+			const dataList = document.getElementById("data");
+			const li = dataList.querySelectorAll("li");
+
+			inputField.addEventListener("keyup", () => {
+				if (inputField.value.trim() !== "") {
+					let data = inputField.value;
+
+					li.forEach((item) => {
+						item.style.display = item.textContent
+							.toLowerCase()
+							.includes(data)
+							? "block"
+							: "none";
+					});
+				} else {
+					li.forEach((item) => {
+						item.style.display = "block";
+					});
+				}
+			});
+		</script>
+	</body>
+</html>
